@@ -1,11 +1,12 @@
 import React from 'react';
+import classes from './Post.module.css';
 
-const Post: React.FC = () => {
+const Post: React.FC<{ name: string; text: string }> = (props) => {
   return (
-    <div>
-      <p>Aliaksandr</p>
-      <p>ReactJS is normal technology!</p>
-    </div>
+    <li className={classes.post}>
+      <p className={classes.author}>{props.name}</p>
+      <p className={classes.text}>{props.text}</p>
+    </li>
   );
 };
 
