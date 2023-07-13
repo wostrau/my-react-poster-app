@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React from 'react';
 import { PostType } from '../App';
 import Post from './Post';
 import classes from './PostsList.module.css';
@@ -10,26 +10,11 @@ const PostsList: React.FC<{
   isPosting: boolean;
   onStopPosting: () => void;
 }> = ({ posts, isPosting, onStopPosting }) => {
-  const [enteredBody, setEnteredBody] = React.useState<string | null>(null);
-  const [enteredAuthor, setEnteredAuthor] = React.useState<string | null>(null);
-
-  const bodyChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setEnteredBody(event.currentTarget.value);
-  };
-
-  const authorChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setEnteredAuthor(event.currentTarget.value);
-  };
-
   return (
     <React.Fragment>
       {isPosting && (
         <Modal onClose={onStopPosting}>
-          <NewPost
-            onBodyChange={bodyChangeHandler}
-            onAuthorChange={authorChangeHandler}
-            onCancel={onStopPosting}
-          />
+          <NewPost onCancel={onStopPosting} />
         </Modal>
       )}
       <ul className={classes.posts}>
