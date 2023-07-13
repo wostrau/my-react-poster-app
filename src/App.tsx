@@ -1,5 +1,6 @@
 import React from 'react';
 import PostsList from './components/PostsList';
+import MainHeader from './components/MainHeader';
 
 export type PostType = { id: string; author: string; body: string };
 const posts: PostType[] = [
@@ -10,10 +11,27 @@ const posts: PostType[] = [
 ];
 
 const App: React.FC = () => {
+  const [modalIsVisible, setModalIsVisible] = React.useState(false);
+
+  const hideModalHandler = () => {
+    setModalIsVisible(false);
+  };
+
+  const showModalHandler = () => {
+    setModalIsVisible(true);
+  };
+
   return (
-    <main>
-      <PostsList posts={posts} />
-    </main>
+    <React.Fragment>
+      <MainHeader onCreatePost={showModalHandler} />
+      <main>
+        <PostsList
+          posts={posts}
+          isPosting={modalIsVisible}
+          onStopPosting={hideModalHandler}
+        />
+      </main>
+    </React.Fragment>
   );
 };
 

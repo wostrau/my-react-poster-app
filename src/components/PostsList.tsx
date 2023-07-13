@@ -5,14 +5,13 @@ import classes from './PostsList.module.css';
 import NewPost from './NewPost';
 import Modal from './Modal';
 
-const PostsList: React.FC<{ posts: PostType[] }> = ({ posts }) => {
-  const [modalIsVisible, setModalIsVisible] = React.useState(true);
+const PostsList: React.FC<{
+  posts: PostType[];
+  isPosting: boolean;
+  onStopPosting: () => void;
+}> = ({ posts, isPosting, onStopPosting }) => {
   const [enteredBody, setEnteredBody] = React.useState<string | null>(null);
   const [enteredAuthor, setEnteredAuthor] = React.useState<string | null>(null);
-
-  const hideModalHandler = () => {
-    setModalIsVisible(false);
-  };
 
   const bodyChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setEnteredBody(event.currentTarget.value);
@@ -24,11 +23,12 @@ const PostsList: React.FC<{ posts: PostType[] }> = ({ posts }) => {
 
   return (
     <React.Fragment>
-      {modalIsVisible && (
-        <Modal onClose={hideModalHandler}>
+      {isPosting && (
+        <Modal onClose={onStopPosting}>
           <NewPost
             onBodyChange={bodyChangeHandler}
             onAuthorChange={authorChangeHandler}
+            onCancel={onStopPosting}
           />
         </Modal>
       )}
