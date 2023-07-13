@@ -2,7 +2,10 @@ import React, { ChangeEvent, FormEvent } from 'react';
 
 import classes from './NewPost.module.css';
 
-const NewPost: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
+const NewPost: React.FC<{
+  onCancel: () => void;
+  onAddPost: (arg: { author: string; body: string }) => void;
+}> = ({ onCancel, onAddPost }) => {
   const [enteredBody, setEnteredBody] = React.useState<string>('');
   const [enteredAuthor, setEnteredAuthor] = React.useState<string>('');
 
@@ -12,15 +15,16 @@ const NewPost: React.FC<{ onCancel: () => void }> = ({ onCancel }) => {
 
   const authorChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setEnteredAuthor(event.currentTarget.value);
-    const postData = {
-      author: enteredAuthor,
-      body: enteredBody,
-    };
-    onCancel();
   };
 
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const postData = {
+        author: enteredAuthor,
+        body: enteredBody,
+      };
+      onAddPost(postData);
+      onCancel();
   };
 
   return (
