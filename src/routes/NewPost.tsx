@@ -2,11 +2,11 @@ import React, { ChangeEvent, FormEvent } from 'react';
 
 import classes from './NewPost.module.css';
 import Modal from '../components/Modal';
+import { Link } from 'react-router-dom';
 
 const NewPost: React.FC<{
-  onCancel: () => void;
   onAddPost: (arg: { author: string; body: string }) => void;
-}> = ({ onCancel, onAddPost }) => {
+}> = ({ onAddPost }) => {
   const [enteredBody, setEnteredBody] = React.useState<string>('');
   const [enteredAuthor, setEnteredAuthor] = React.useState<string>('');
 
@@ -25,7 +25,6 @@ const NewPost: React.FC<{
       body: enteredBody,
     };
     onAddPost(postData);
-    onCancel();
   };
 
   return (
@@ -52,9 +51,9 @@ const NewPost: React.FC<{
           />
         </p>
         <p className={classes.actions}>
-          <button type='button' onClick={onCancel}>
+          <Link to='..' type='button'>
             Cancel
-          </button>
+          </Link>
           <button>Submit</button>
         </p>
       </form>
