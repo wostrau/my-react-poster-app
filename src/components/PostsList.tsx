@@ -13,7 +13,12 @@ const PostsList: React.FC = () => {
       {posts.length > 0 && (
         <ul className={classes.posts}>
           {posts.map((post) => (
-            <Post key={post.id} name={post.author} text={post.body} />
+            <Post
+              key={post.id}
+              id={post.id}
+              author={post.author}
+              text={post.body}
+            />
           ))}
         </ul>
       )}
