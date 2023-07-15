@@ -4,18 +4,18 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import RootLayout from './routes/RootLayout.tsx';
 import './index.css';
-import NewPost from './components/NewPost.tsx';
-import App from './App.tsx';
+import NewPost from './routes/NewPost.tsx';
+import Posts from './routes/Posts.tsx';
 
 const browserRouter = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
     children: [
-      { path: '/', element: <App /> },
       {
-        path: '/create-post',
-        element: <NewPost onAddPost={() => {}} onCancel={() => {}} />,
+        path: '/',
+        element: <Posts />,
+        children: [{ path: '/create-post', element: <NewPost /> }],
       },
     ],
   },

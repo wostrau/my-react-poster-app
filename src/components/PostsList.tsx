@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Post from './Post';
 import classes from './PostsList.module.css';
-import NewPost from './NewPost';
-import Modal from './Modal';
 
 export type PostType = { id: string; author: string; body: string };
-type PostsListPropsType = { isPosting: boolean; onStopPosting: () => void };
 
-const PostsList: React.FC<PostsListPropsType> = (props) => {
-  const { isPosting, onStopPosting } = props;
-
+const PostsList: React.FC = () => {
   const [posts, setPosts] = useState<PostType[]>([]);
   const [isFetching, setIsFetching] = useState(false);
 
@@ -41,11 +36,6 @@ const PostsList: React.FC<PostsListPropsType> = (props) => {
 
   return (
     <React.Fragment>
-      {isPosting && (
-        <Modal onClose={onStopPosting}>
-          <NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
-        </Modal>
-      )}
       {isFetching && (
         <div style={{ textAlign: 'center', color: 'white' }}>
           <p>Loading...</p>
