@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 const RootLayout = () => {
   return (
     <React.Fragment>
-      <MainHeader onCreatePost={() => {}} />
+      <MainHeader />
       <Outlet />
     </React.Fragment>
   );

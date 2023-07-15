@@ -8,21 +8,6 @@ export type PostType = { id: string; author: string; body: string };
 const PostsList: React.FC = () => {
   const posts = useLoaderData() as PostType[];
 
-  const addPostHandler = (postData: { author: string; body: string }) => {
-    const { author, body } = postData;
-
-    fetch('http://localhost:8080/posts', {
-      method: 'POST',
-      body: JSON.stringify(postData),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    const newPost: PostType = { id: new Date().toString(), author, body };
-    setPosts((existingPosts) => [newPost, ...existingPosts]);
-  };
-
   return (
     <React.Fragment>
       {posts.length > 0 && (
